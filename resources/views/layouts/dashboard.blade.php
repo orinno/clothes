@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>General Dashboard &mdash; Stisla</title>
+  <title>Dashboard &mdash; Laundry</title>
 
   <!-- General CSS Files -->
   <script src="https://kit.fontawesome.com/e27c686fcd.js" crossorigin="anonymous"></script>
@@ -35,7 +35,7 @@
       </div>
       <footer class="main-footer">
         <div class="footer-left">
-          Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
+          Copyright &copy; 2023 <div class="bullet"></div> Design By <a href="https://instagram.com/official_serialize/">Serialize</a>
         </div>
         <div class="footer-right">
           2.3.0
@@ -43,6 +43,8 @@
       </footer>
     </div>
   </div>
+
+  @stack('modal')
 
   <!-- General JS Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>

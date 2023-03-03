@@ -12,15 +12,9 @@ class StatusPesananController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return view('status_pesanan.index', [
+            'status_pesanan' => StatusPesanan::all()
+        ]);
     }
 
     /**
@@ -28,13 +22,15 @@ class StatusPesananController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        StatusPesanan::create($request->all());
+
+        return redirect()->route('status_pesanan.index')->with('success', 'Status Pesanan berhasil ditambahkan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(StatusPesanan $statusPesanan)
+    public function show(StatusPesanan $status_pesanan)
     {
         //
     }
@@ -42,7 +38,7 @@ class StatusPesananController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(StatusPesanan $statusPesanan)
+    public function edit(StatusPesanan $status_pesanan)
     {
         //
     }
@@ -50,7 +46,7 @@ class StatusPesananController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, StatusPesanan $statusPesanan)
+    public function update(Request $request, StatusPesanan $status_pesanan)
     {
         //
     }
@@ -58,8 +54,10 @@ class StatusPesananController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(StatusPesanan $statusPesanan)
+    public function destroy(StatusPesanan $status_pesanan)
     {
-        //
+        $status_pesanan->delete();
+
+        return redirect()->route('status_pesanan.index')->with('success', 'Status Pesanan berhasil dihapus');
     }
 }

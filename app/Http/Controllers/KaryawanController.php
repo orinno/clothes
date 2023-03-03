@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Konsumen;
+
 use Illuminate\Http\Request;
 
-class KonsumenController extends Controller
+class KaryawanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('konsumen.index', [
-            'konsumen' => Konsumen::all()
-        ]);
+        return view('karyawan.index');
     }
 
     /**
@@ -36,7 +34,7 @@ class KonsumenController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Konsumen $konsumen)
+    public function show(string $id)
     {
         //
     }
@@ -44,7 +42,7 @@ class KonsumenController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Konsumen $konsumen)
+    public function edit(string $id)
     {
         //
     }
@@ -52,7 +50,7 @@ class KonsumenController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Konsumen $konsumen)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -60,7 +58,7 @@ class KonsumenController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Konsumen $konsumen)
+    public function destroy(string $id)
     {
         //
     }

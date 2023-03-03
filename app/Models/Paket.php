@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Paket extends Model
 {
     use HasFactory;
+
+    protected $table = 'paket';
+
+    protected $guarded = [];
+
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class);
+    }
 }

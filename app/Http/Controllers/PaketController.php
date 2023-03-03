@@ -12,15 +12,9 @@ class PaketController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return view('paket.index', [
+            'paket' => Paket::all()
+        ]);
     }
 
     /**
@@ -28,21 +22,15 @@ class PaketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Paket::create($request->all());
+
+        return redirect()->route('paket.index')->with('success', 'Paket berhasil ditambahkan');
     }
 
     /**
      * Display the specified resource.
      */
     public function show(Paket $paket)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Paket $paket)
     {
         //
     }
@@ -60,6 +48,8 @@ class PaketController extends Controller
      */
     public function destroy(Paket $paket)
     {
-        //
+        $paket->delete();
+
+        return redirect()->route('paket.index')->with('success', 'Paket berhasil dihapus');
     }
 }

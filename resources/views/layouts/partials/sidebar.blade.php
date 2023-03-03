@@ -11,17 +11,17 @@
                 <a href="{{ route('dashboard') }}" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
               </li>
               <li class="menu-header">Data Reference</li>
-              <li><a class="nav-link" href="blank.html"><i class="fas fa-boxes-packing"></i> <span>Paket</span></a></li>
-              <li><a class="nav-link" href="blank.html"><i class="fas fa-money-bill-wave"></i> <span>Tipe Pembayaran</span></a></li>
-              <li><a class="nav-link" href="blank.html"><i class="fas fa-boxes-stacked"></i> <span>Status</span></a></li>
+              <li><a class="nav-link" href=""><i class="fas fa-boxes-packing"></i> <span>Paket</span></a></li>
+              <li><a class="nav-link" href=""><i class="fas fa-money-bill-wave"></i> <span>Tipe Pembayaran</span></a></li>
+              <li><a class="nav-link" href=""><i class="fas fa-boxes-stacked"></i> <span>Status</span></a></li>
               <li class="menu-header">User Management</li>
-              <li><a class="nav-link" href="credits.html"><i class="fas fa-users"></i> <span>Konsumen</span></a></li>
-              <li><a class="nav-link" href="credits.html"><i class="fas fa-user-tie"></i></i> <span>Karyawan</span></a></li>
+              <li><a class="nav-link" href=""><i class="fas fa-users"></i> <span>Konsumen</span></a></li>
+              <li><a class="nav-link" href=""><i class="fas fa-user-tie"></i></i> <span>Karyawan</span></a></li>
               <li class="menu-header">Portal</li>
-              <li><a class="nav-link" href="credits.html"><i class="fas fa-money-bill-transfer"></i> <span>Transaksi</span></a></li>
+              <li><a class="nav-link" href=""><i class="fas fa-money-bill-transfer"></i> <span>Transaksi</span></a></li>
               <li class="menu-header">Laporan</li>
-              <li><a class="nav-link" href="credits.html"><i class="fas fa-receipt"></i> <span>Laporan Transaksi</span></a></li>
-              <li><a class="nav-link" href="credits.html"><i class="fas fa-file-invoice-dollar"></i> <span>Laporan Keuangan</span></a></li>
+              <li><a class="nav-link" href=""><i class="fas fa-receipt"></i> <span>Laporan Transaksi</span></a></li>
+              <li><a class="nav-link" href=""><i class="fas fa-file-invoice-dollar"></i> <span>Laporan Keuangan</span></a></li>
 
             </ul>
 
