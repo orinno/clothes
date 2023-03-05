@@ -17,15 +17,15 @@
                     <div class="card-stats-title">Order Statistics {{ date('M') }}</div>
                     <div class="card-stats-items">
                         <div class="card-stats-item">
-                            <div class="card-stats-item-count">24</div>
-                            <div class="card-stats-item-label">Pending</div>
+                            <div class="card-stats-item-count">{{ $status['BARU'] }}</div>
+                            <div class="card-stats-item-label">Baru</div>
                         </div>
                         <div class="card-stats-item">
-                            <div class="card-stats-item-count">12</div>
+                            <div class="card-stats-item-count">{{ $status['DIPROSES'] }}</div>
                             <div class="card-stats-item-label">Proses</div>
                         </div>
                         <div class="card-stats-item">
-                            <div class="card-stats-item-count">23</div>
+                            <div class="card-stats-item-count">{{ $status['SELESAI'] }}</div>
                             <div class="card-stats-item-label">Completed</div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                         <h4>Total Orders</h4>
                     </div>
                     <div class="card-body">
-                        59
+                        {{ $status['BARU'] + $status['DIPROSES'] + $status['SELESAI'] }}
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                             <h4>Total Income Today</h4>
                         </div>
                         <div class="card-body">
-                            Rp. 145.400
+                            Rp. {{ number_format($income_today, 0, ',', '.') }}
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                             <h4>Total has served</h4>
                         </div>
                         <div class="card-body">
-                            4,732
+                            {{ number_format($transaksi_all_count, 0, ',', '.') }}
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                             <h4>Total Income Mohthly</h4>
                         </div>
                         <div class="card-body">
-                            Rp. 12.450.000
+                            Rp. {{ number_format($income_month, 0, ',', '.') }}
                         </div>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                             <h4>Total Konsumen</h4>
                         </div>
                         <div class="card-body">
-                            4,732
+                            {{ number_format($konsumen_all, 0, ',', '.') }}
                         </div>
                     </div>
                 </div>
@@ -117,14 +117,6 @@
                 </div>
                 <div class="card-body">
                     <canvas id="myChart" height="182"></canvas>
-                    <div class="statistic-details mt-sm-4">
-                        <div class="statistic-details-item">
-                            <span class="text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span>
-                                7%</span>
-                            <div class="detail-value">Rp. 450.000</div>
-                            <div class="detail-name">Monthly Income</div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -136,8 +128,7 @@
                 <div class="card-body">
                     <ul class="list-unstyled list-unstyled-border">
                         <li class="media">
-                            <img class="mr-3 rounded-circle" width="50" src="/img/avatar/avatar-1.png"
-                                alt="avatar">
+                            <img class="mr-3 rounded-circle" width="50" src="/img/avatar/avatar-1.png" alt="avatar">
                             <div class="media-body">
                                 <div class="float-right text-primary">Now</div>
                                 <div class="media-title">Farhan A Mujib</div>
@@ -146,8 +137,7 @@
                             </div>
                         </li>
                         <li class="media">
-                            <img class="mr-3 rounded-circle" width="50" src="/img/avatar/avatar-2.png"
-                                alt="avatar">
+                            <img class="mr-3 rounded-circle" width="50" src="/img/avatar/avatar-2.png" alt="avatar">
                             <div class="media-body">
                                 <div class="float-right">12m</div>
                                 <div class="media-title">Ujang Maman</div>
@@ -156,8 +146,7 @@
                             </div>
                         </li>
                         <li class="media">
-                            <img class="mr-3 rounded-circle" width="50" src="/img/avatar/avatar-3.png"
-                                alt="avatar">
+                            <img class="mr-3 rounded-circle" width="50" src="/img/avatar/avatar-3.png" alt="avatar">
                             <div class="media-body">
                                 <div class="float-right">17m</div>
                                 <div class="media-title">Rizal Fakhri</div>
@@ -187,6 +176,15 @@
     </div>
 @endsection
 
+@php
+    function _tanggal($tanggal)
+    {
+        $bulan = ['Januari', 'Ferbuari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+        return $bulan[(int) $tanggal];
+    }
+@endphp
+
 @push('js')
     <script src="/package/simpleweather/jquery.simpleWeather.min.js"></script>
     <script src="/package/chart.js/dist/Chart.min.js"></script>
@@ -194,4 +192,58 @@
     <script src="/package/jqvmap/dist/maps/jquery.vmap.world.js"></script>
     <script src="/package/summernote/dist/summernote-bs4.js"></script>
     <script src="/package/chocolat/dist/js/jquery.chocolat.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            var statistics_chart = document.getElementById("myChart").getContext('2d');
+
+            if (statistics_chart != null) {
+                var myChart = new Chart(statistics_chart, {
+                    type: 'line',
+                    data: {
+                        labels: [
+                            <?php foreach ($chart_data as $value) {
+                                echo '"' . _tanggal($value->month) . '",';
+                            } ?>
+                        ],
+                        datasets: [{
+                            label: 'Statistics',
+                            data: [
+                                <?php foreach ($chart_data as $value) {
+                                    echo $value->total . ', ';
+                                } ?>
+                            ],
+                            borderWidth: 5,
+                            borderColor: '#6777ef',
+                            backgroundColor: 'transparent',
+                            pointBackgroundColor: '#fff',
+                            pointBorderColor: '#6777ef',
+                            pointRadius: 4
+                        }]
+                    },
+                    options: {
+                        legend: {
+                            display: false
+                        },
+                        scales: {
+                            yAxes: [{
+                                gridLines: {
+                                    display: false,
+                                    drawBorder: false,
+                                }
+
+                            }],
+                            xAxes: [{
+                                gridLines: {
+                                    color: '#fbfbfb',
+                                    lineWidth: 2
+                                }
+                            }]
+                        },
+                    }
+                });
+            }
+        });
+    </script>
 @endpush

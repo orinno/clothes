@@ -10,4 +10,9 @@ class Konsumen extends Model
     use HasFactory;
 
     protected $table = 'konsumen';
+
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class, 'id_konsumen');
+    }
 }

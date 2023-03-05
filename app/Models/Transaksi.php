@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\StatusPesanan;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Transaksi extends Model
 {
@@ -32,8 +33,8 @@ class Transaksi extends Model
         return $this->belongsTo(TipePembayaran::class);
     }
 
-    public function status_pembayaran()
+    public function status_pesanan()
     {
-        return $this->belongsTo(StatusPembayaran::class);
+        return $this->belongsTo(StatusPesanan::class);
     }
 }
