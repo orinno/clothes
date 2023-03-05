@@ -15,26 +15,26 @@ class Transaksi extends Model
 
     public function konsumen()
     {
-        return $this->belongsTo(Konsumen::class);
+        return $this->belongsTo(Konsumen::class, 'id_konsumen');
     }
 
     public function karyawan()
     {
-        return $this->belongsTo(Karyawan::class);
+        return $this->belongsTo(Karyawan::class, 'id_karyawan');
     }
 
     public function paket()
     {
-        return $this->belongsTo(Paket::class);
+        return $this->belongsTo(Paket::class, 'paket_id');
     }
 
     public function tipe_pembayaran()
     {
-        return $this->belongsTo(TipePembayaran::class);
+        return $this->belongsTo(TipePembayaran::class, 'tipe_pembayaran_id');
     }
 
     public function status_pesanan()
     {
-        return $this->belongsTo(StatusPesanan::class);
+        return $this->belongsTo(StatusPesanan::class, 'status_pesanan_id');
     }
 }

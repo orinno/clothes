@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Paket;
+use App\Models\Konsumen;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
+use App\Models\StatusPesanan;
+use App\Models\TipePembayaran;
 
 class TransaksiController extends Controller
 {
@@ -12,7 +16,8 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        //
+        $transaksi = Transaksi::all();
+        return view('transaksi.index', compact('transaksi'));
     }
 
     /**
@@ -20,7 +25,12 @@ class TransaksiController extends Controller
      */
     public function create()
     {
-        //
+        $konsumen = Konsumen::all();
+        $paket = Paket::all();
+        $tipe_pembayaran = TipePembayaran::all();
+        $status_pesanan = StatusPesanan::all();
+
+        return view('transaksi.create', compact('konsumen', 'paket', 'tipe_pembayaran', 'status_pesanan'));
     }
 
     /**

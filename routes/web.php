@@ -34,4 +34,5 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     require_once "pages/status_pesanan.php";
     require_once "pages/konsumen.php";
     require_once "pages/karyawan.php";
+    require_once "pages/transaksi.php";
 });
