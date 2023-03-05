@@ -8,6 +8,7 @@ use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use App\Models\StatusPesanan;
 use App\Models\TipePembayaran;
+use Illuminate\Support\Facades\Auth;
 
 class TransaksiController extends Controller
 {
@@ -17,7 +18,8 @@ class TransaksiController extends Controller
     public function index()
     {
         $transaksi = Transaksi::all();
-        return view('transaksi.index', compact('transaksi'));
+        $status_pesanan = StatusPesanan::all();
+        return view('transaksi.index', compact('transaksi', 'status_pesanan'));
     }
 
     /**
@@ -28,9 +30,9 @@ class TransaksiController extends Controller
         $konsumen = Konsumen::all();
         $paket = Paket::all();
         $tipe_pembayaran = TipePembayaran::all();
-        $status_pesanan = StatusPesanan::all();
 
-        return view('transaksi.create', compact('konsumen', 'paket', 'tipe_pembayaran', 'status_pesanan'));
+
+        return view('transaksi.create', compact('konsumen', 'paket', 'tipe_pembayaran'));
     }
 
     /**
@@ -38,7 +40,36 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "id_konsumen" => "required",
+            "id_paket" => "required",
+            "berat" => "required",
+            "tanggal_masuk" => "required",
+            "tanggal_keluar" => "required",
+            "id_tipe_pembayaran" => "required",
+            "status" => "required",
+            "invoice" => "required|unique:transaksi",
+            "diskon" => "required",
+            "total_bayar" => "required",
+        ]);
+
+        Transaksi::create([
+            "id_konsumen" => $request->id_konsumen,
+            "paket_id" => $request->id_paket,
+            "id_karyawan" => Auth::user()->id,
+            "tanggal_masuk" => $request->tanggal_masuk,
+            "tanggal_keluar" => $request->tanggal_keluar,
+            "status_pesanan_id" => StatusPesanan::first()->id,
+            "tipe_pembayaran_id" => $request->id_tipe_pembayaran,
+            "status_bayar" => $request->status,
+            "invoice" => $request->invoice,
+            "diskon" => $request->diskon,
+            "berat" => $request->berat,
+            "total_bayar" => $request->total_bayar,
+        ]);
+
+        return redirect()->route('transaksi.index')
+            ->with('success', 'Transaksi created successfully.');
     }
 
     /**
@@ -62,7 +93,11 @@ class TransaksiController extends Controller
      */
     public function update(Request $request, Transaksi $transaksi)
     {
-        //
+        $transaksi->status_pesanan_id = $request->status_pesanan_id;
+        $transaksi->save();
+
+        return redirect()->route('transaksi.index')
+            ->with('success', 'Transaksi updated successfully');
     }
 
     /**
