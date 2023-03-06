@@ -48,7 +48,8 @@ class TipePembayaranController extends Controller
      */
     public function update(Request $request, TipePembayaran $tipe_pembayaran)
     {
-        //
+        $tipe_pembayaran->update($request->all());
+        return redirect()->route('tipe_pembayaran.index')->with('success', 'Tipe pembayaran berhasil diubah');
     }
 
     /**

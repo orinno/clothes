@@ -62,8 +62,8 @@
                                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                                     </button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#"><i class="fa-solid fa-pen-to-square text-primary pr-2"></i> Update</a>
-                                                        <form action="{{ route('tipe_pembayaran.destroy', $row->id) }}"
+                                                        <a class="dropdown-item" data-toggle="modal" href="#edit{{$row->id}}"><i class="fa-solid fa-pen-to-square text-primary pr-2"></i> Update</a>
+                                                        <form action="{{ route('status_pesanan.destroy', $row->id) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
@@ -113,6 +113,37 @@
             </div>
         </div>
     </div>
+
+    @foreach($status_pesanan as $data)
+    <div class="modal fade" tabindex="-1" role="dialog" id="edit{{$data->id}}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ubah Data Status Pesanan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('status_pesanan.update', $data->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Status Pesanan</label>
+                            <input type="text" name="nama" value="{{$data->nama}}" class="form-control" required id="recipient-name"
+                                placeholder="Baru M">
+                        </div>
+                        </div>
+                        <div class="modal-footer bg-whitesmoke br">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endforeach
+
     </div>
 @endpush
 

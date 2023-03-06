@@ -40,7 +40,8 @@ class PaketController extends Controller
      */
     public function update(Request $request, Paket $paket)
     {
-        //
+        $paket->update($request->all());
+        return redirect()->route('paket.index')->with('success', 'Paket berhasil diubah');
     }
 
     /**

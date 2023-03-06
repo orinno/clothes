@@ -33,8 +33,8 @@
                     <div class="card-header">
                         <h4>Management Data Transaksi</h4>
                         <div class="card-header-action">
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Tambah
-                                Transaksi</button>
+                            <a class="btn btn-primary" href="/dashboard/transaksi/create">Tambah
+                                Transaksi</a>
                         </div>
                     </div>
 

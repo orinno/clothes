@@ -48,7 +48,8 @@ class StatusPesananController extends Controller
      */
     public function update(Request $request, StatusPesanan $status_pesanan)
     {
-        //
+        $status_pesanan->update($request->all());
+        return redirect()->route('status_pesanan.index')->with('success', 'Status Pesanan berhasil diubah');
     }
 
     /**

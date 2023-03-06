@@ -55,7 +55,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @foreach ($konsumen as $row)
+                                    @foreach ($konsumen as $row)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $row->nama }}</td>
@@ -70,7 +70,7 @@
                                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                                     </button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#"><i class="fa-solid fa-pen-to-square text-primary pr-2"></i> Update</a>
+                                                    <a class="dropdown-item" data-toggle="modal" href="#edit{{$row->id}}"><i class="fa-solid fa-pen-to-square text-primary pr-2"></i> Update</a>
                                                         <form action="{{ route('konsumen.destroy', $row->id) }}"
                                                             method="POST">
                                                             @csrf
@@ -82,7 +82,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                    @endforeach --}}
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -104,7 +104,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('konsumen.store') }}" method="POST">
+                    <form action="{{ route('konsumen.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Nama Konsumen</label>
@@ -113,17 +113,17 @@
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Email</label>
-                            <input type="number" name="harga" class="form-control" required id="message-text"
+                            <input type="email" name="email" class="form-control" required id="message-text"
                                 placeholder="">
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Telephone</label>
-                            <input type="number" name="jumlah_hari" class="form-control" required id="message-text"
+                            <input type="number" name="telephone" class="form-control" required id="message-text"
                                 placeholder="">
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Alamat</label>
-                            <input type="text" name="jenis" class="form-control" required id="message-text"
+                            <input type="text" name="alamat" class="form-control" required id="message-text"
                                 placeholder="">
                         </div>
                         <div class="form-group">
@@ -142,6 +142,64 @@
             </div>
         </div>
     </div>
+
+    @foreach($konsumen as $data)
+    <div class="modal fade " tabindex="-1" role="dialog" id="edit{{$data->id}}">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Buat Data Konsumen Baru</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('konsumen.update', $data->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nama Konsumen</label>
+                            <input type="text" name="nama" value="{{$data->nama}}" class="form-control" required id="recipient-name"
+                                placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Email</label>
+                            <input type="email" name="email" value="{{$data->email}}" class="form-control" required id="message-text"
+                                placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Telephone</label>
+                            <input type="number" name="telephone" value="{{$data->telephone}}" class="form-control" required id="message-text"
+                                placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Alamat</label>
+                            <input type="text" name="alamat" value="{{$data->alamat}}" class="form-control" required id="message-text"
+                                placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Foto</label>
+                            {{-- @if($data->foto == '')
+                            <img alt="image" src="/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+                            @else
+                            <img src="{{asset('images/'. $data->foto)}}" class="rounded-circle mr-1" width="100">
+                            @endif --}}
+                            <div class="custom-file">
+                                <input type="file" name="foto" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endforeach
+
     </div>
 @endpush
 

@@ -70,7 +70,7 @@
                                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                                     </button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#"><i class="fa-solid fa-pen-to-square text-primary pr-2"></i> Update</a>
+                                                        <a class="dropdown-item" data-toggle="modal" href="#edit{{$row->id}}"><i class="fa-solid fa-pen-to-square text-primary pr-2"></i> Update</a>
                                                         <form action="{{ route('paket.destroy', $row->id) }}"
                                                             method="POST">
                                                             @csrf
@@ -155,6 +155,72 @@
             </div>
         </div>
     </div>
+
+    @foreach($paket as $p)
+    <div class="modal fade" tabindex="-1" role="dialog" id="edit{{$p->id}}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ubah Data Paket</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('paket.update', $p->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nama Paket</label>
+                            <input type="text" name="nama" value="{{$p->nama}}" class="form-control" required id="recipient-name"
+                                placeholder="Paket Kilat Baju Kiloan">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Jenis Paket</label>
+                            <input type="text" name="jenis" value="{{$p->jenis}}" class="form-control" required id="message-text"
+                                placeholder="Paket Kilat">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Lama Hari</label>
+                            <input type="number" name="jumlah_hari" value="{{$p->jumlah_hari}}" class="form-control" required id="message-text"
+                                placeholder="5">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Harga</label>
+                            <input type="number" name="harga" value="{{$p->harga}}" class="form-control" required id="message-text"
+                                placeholder="60.000">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Satuan</label>
+                            <div class="selectgroup w-100">
+                                <label class="selectgroup-item">
+                                    <input type="radio" name="satuan" required value="KG"
+                                        class="selectgroup-input">
+                                    <span class="selectgroup-button">KG</span>
+                                </label>
+                                <label class="selectgroup-item">
+                                    <input type="radio" name="satuan" required value="METER"
+                                        class="selectgroup-input">
+                                    <span class="selectgroup-button">METER</span>
+                                </label>
+                                <label class="selectgroup-item">
+                                    <input type="radio" name="satuan" required value="BUAH"
+                                        class="selectgroup-input">
+                                    <span class="selectgroup-button">BUAH</span>
+                                </label>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endforeach
+
     </div>
 @endpush
 

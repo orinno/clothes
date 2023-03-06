@@ -141,7 +141,7 @@
                                                     <i class="fas fa-phone"></i>
                                                 </div>
                                             </div>
-                                            <input type="text" name="berat" id="input_berat" class="form-control">
+                                            <input type="text" placeholder="Masukan berat cucian" name="berat" id="input_berat" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -255,7 +255,7 @@
                                                     <i class="fas fa-phone"></i>
                                                 </div>
                                             </div>
-                                            <input type="text" name="diskon" id="input_diskon" class="form-control">
+                                            <input type="text" placeholder="Rp. 0" name="diskon" id="input_diskon" class="form-control">
                                         </div>
                                     </div>
                                 </div>

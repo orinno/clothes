@@ -5,23 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Konsumen extends Model
+class Karyawan extends Model
 {
     use HasFactory;
-
-    protected $table = 'konsumen';
-
+    
+    protected $table = 'karyawan';
     protected $fillable = [
-        'kode_konsumen',
-        'nama',
+        'kode_karyawan',
+        'name',
         'email',
         'alamat',
         'telephone',
-        'foto'
+        'password'
     ];
-
-    public function transaksi()
-    {
-        return $this->hasMany(Transaksi::class, 'id_konsumen');
-    }
 }
