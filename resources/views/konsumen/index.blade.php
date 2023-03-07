@@ -62,7 +62,14 @@
                                             <td>{{ $row->alamat }}</td>
                                             <td>{{ $row->telephone }}</td>
                                             <td>{{ $row->email }}</td>
-                                            <td>{{ $row->foto }}</td>
+                                            
+                                            <td>
+                                                @if($row->foto != null)
+                                                <a href="{{asset('/images'.'/'. $row->foto)}}" target="_blank" class="mt-2" rel="noreferrer">Lihat Foto</a><br>
+                                                @else
+                                                <span>-</span>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <div class="dropdown">
                                                     <button class="btn" type="button" id="dropdownMenuButton"
@@ -178,12 +185,13 @@
                                 placeholder="">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Foto</label>
-                            {{-- @if($data->foto == '')
-                            <img alt="image" src="/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+                            @if($data->foto == '')
+                            <img alt="image" src="/img/avatar/avatar-1.png" width="50" class="rounded-circle mr-1">
                             @else
-                            <img src="{{asset('images/'. $data->foto)}}" class="rounded-circle mr-1" width="100">
-                            @endif --}}
+                            <img src="{{asset('images/'. $data->foto)}}" class="mr-1" width="50">
+                            @endif
+                            <br>
+                            <label class="form-label">Foto</label>
                             <div class="custom-file">
                                 <input type="file" name="foto" class="custom-file-input" id="customFile">
                                 <label class="custom-file-label" for="customFile">Choose file</label>

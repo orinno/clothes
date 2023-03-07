@@ -44,7 +44,6 @@ class KonsumenController extends Controller
         $konsumen->telephone = $request->input('telephone');
 
         if ($request->hasFile('foto')) {
-            //save images
             $foto = $request->file('foto');
             $name = time().rand(1,50).'.'.$foto->getClientOriginalName();
             $path = public_path('/images');
@@ -52,8 +51,7 @@ class KonsumenController extends Controller
             $img->resize(300, 400, function ($constraint) {
                 $constraint->aspectRatio();
             })->save($path.'/'.$name);
-            $pict = $name;
-            $konsumen->foto = $pict;
+            $konsumen->foto = $name;
         }
 
         if($konsumen){
@@ -84,19 +82,32 @@ class KonsumenController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Konsumen $konsumen)
+    public function update(Request $request, $id)
     {
-        //update request with image
-        $request->validate([
-            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg',
-        ]);
-        $konsumen->update($request->data);
+        $k = Konsumen::findOrFail($id);
+        $nama = $k->nama;
+        $k->nama = $request->input('nama');
+        $k->email = $request->input('email');
+        $k->alamat = $request->input('alamat');
+        $k->telephone = $request->input('telephone');
         if ($request->hasFile('foto')) {
-            $request->file('foto')->move('images/', $request->file('foto')->getClientOriginalName());
-            $konsumen->foto = $request->file('foto')->getClientOriginalName();
-            $konsumen->save();
+            $foto = $request->file('foto');
+            $name = time().rand(1,50).'.'.$foto->getClientOriginalExtension();
+            $path = public_path('/images');
+            $img = Image::make($foto->path());
+            $img->resize(300, 400, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($path.'/'.$name);
+            $pict = $name;
+            if($pict != null) # kalo sudah ada profile dan mau update, function delete old pic
+            {
+                $path = public_path('/images');
+                File::delete($path.'/'.$k->foto);
+            }
+            $k->foto = $pict;
         }
-        return redirect('/konsumen')->with('status', 'Data Berhasil Diubah!');
+        $k->save();
+        return redirect('/dashboard/konsumen')->with('status', 'Data Berhasil Diubah!');
 
     }
 

@@ -20,7 +20,7 @@
               <li class="menu-header">Portal</li>
               <li><a class="nav-link" href="/dashboard/transaksi"><i class="fas fa-money-bill-transfer"></i> <span>Transaksi</span></a></li>
               <li class="menu-header">Laporan</li>
-              <li><a class="nav-link" href=""><i class="fas fa-receipt"></i> <span>Laporan Transaksi</span></a></li>
+              <li><a class="nav-link" href="/dashboard/laporan_transaksi"><i class="fas fa-receipt"></i> <span>Laporan Transaksi</span></a></li>
               <li><a class="nav-link" href=""><i class="fas fa-file-invoice-dollar"></i> <span>Laporan Keuangan</span></a></li>
 
             </ul>

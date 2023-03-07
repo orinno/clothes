@@ -35,4 +35,5 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     require_once "pages/konsumen.php";
     require_once "pages/karyawan.php";
     require_once "pages/transaksi.php";
+    require_once "pages/laporan_transaksi.php";
 });
